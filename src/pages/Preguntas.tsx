@@ -18,7 +18,7 @@ export default function Preguntas() {
   const navegar = useNavigate();
 
   if (!contexto) return null;
-  const { aumentarPuntaje } = contexto;
+  const { aumentarPuntaje, registrarRespuesta } = contexto;
 
   useEffect(() => {
     const lista: Pregunta[] = [
@@ -36,6 +36,7 @@ export default function Preguntas() {
     const esCorrecta = respuesta === actual.respuestaCorrecta;
     setSeleccion(respuesta);
     setResultado(esCorrecta ? "Respuesta correcta" : "Respuesta incorrecta");
+    registrarRespuesta();
     if (esCorrecta) aumentarPuntaje(actual.puntajePregunta);
   };
 

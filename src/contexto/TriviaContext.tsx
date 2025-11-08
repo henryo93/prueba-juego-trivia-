@@ -1,9 +1,11 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState } from "react";
+import type { ReactNode } from "react";
 
 interface TriviaContextType {
   puntaje: number;
   preguntasRespondidas: number;
   aumentarPuntaje: (valor: number) => void;
+  registrarRespuesta: () => void;
   reiniciarJuego: () => void;
 }
 
@@ -19,7 +21,10 @@ export function TriviaProvider({ children }: Props) {
 
   const aumentarPuntaje = (valor: number) => {
     setPuntaje(puntaje + valor);
-    setPreguntasRespondidas(preguntasRespondidas + 1);
+  };
+
+  const registrarRespuesta = () => {
+    setPreguntasRespondidas((prev) => prev + 1);
   };
 
   const reiniciarJuego = () => {
@@ -28,7 +33,7 @@ export function TriviaProvider({ children }: Props) {
   };
 
   return (
-    <TriviaContext.Provider value={{ puntaje, preguntasRespondidas, aumentarPuntaje, reiniciarJuego }}>
+    <TriviaContext.Provider value={{ puntaje, preguntasRespondidas, aumentarPuntaje, registrarRespuesta,reiniciarJuego }}>
       {children}
     </TriviaContext.Provider>
   );
